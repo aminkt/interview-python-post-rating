@@ -1,10 +1,11 @@
 from django.contrib.auth.decorators import login_required
 from django.http import JsonResponse
-from rest_framework.decorators import api_view
+from rest_framework.decorators import api_view, throttle_classes
 from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_500_INTERNAL_SERVER_ERROR, HTTP_400_BAD_REQUEST
 from posts.exceptions import ValidationError
 from posts.forms import RatePostForm
+from posts.throttles import RatePostThrottle
 from project.dependencies import Dependencies
 import logging
 
@@ -23,6 +24,7 @@ def post_list_http_handler(request):
 
 @api_view(['POST'])
 @login_required()
+@throttle_classes([RatePostThrottle])
 def rate_post_http_handler(request, post_id):
     try:
         RatePostForm(
