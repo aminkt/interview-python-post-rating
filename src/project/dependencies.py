@@ -1,7 +1,6 @@
-from posts.repositories.django.post_repository import DjangoPostRepository
-from posts.repositories.django.rating_repository import DjangoRatingRepository
-from posts.repositories.interfaces.post_repository_interface import PostRepositoryInterface
-from posts.repositories.interfaces.rating_repository_interface import RatingRepositoryInterface
+from posts.domain.repository_interfaces import PostRepositoryInterface, RatingRepositoryInterface
+from posts.storage.repositories.django.post_repository import DjangoPostRepository
+from posts.storage.repositories.django.rating_repository import DjangoRatingRepository
 
 
 # Dependency container can be replaced whit smt more complicated but i want to keep it easy.

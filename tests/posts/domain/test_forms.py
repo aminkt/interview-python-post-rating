@@ -1,16 +1,16 @@
 import unittest
 from unittest.mock import Mock
 
-from posts.exceptions import ValidationError
-from posts.forms import RatePostForm
-from posts.models import PostModel
+from posts.domain.exceptions import ValidationError
+from posts.domain.use_cases import RatePostUseCase
+from posts.storage.models import PostModel
 
 class TestRatePostForm(unittest.TestCase):
     def setUp(self):
         # Create mocks for RatingRepositoryInterface and PostRepositoryInterface
         self.rating_repo_mock = Mock()
         self.post_repo_mock = Mock()
-        self.form = RatePostForm(self.rating_repo_mock, self.post_repo_mock)
+        self.form = RatePostUseCase(self.rating_repo_mock, self.post_repo_mock)
 
     def test_execute_correct(self):
         # Mock post and rating repositories

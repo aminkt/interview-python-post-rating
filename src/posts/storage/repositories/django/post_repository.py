@@ -2,8 +2,8 @@ from typing import List, Dict, Any
 
 from django.core.paginator import Paginator, EmptyPage
 
-from posts.models import PostModel, RatingModel
-from posts.repositories.interfaces.post_repository_interface import PostRepositoryInterface
+from posts.domain.repository_interfaces import PostRepositoryInterface
+from posts.storage.models import PostModel, RatingModel
 
 
 class DjangoPostRepository(PostRepositoryInterface):
@@ -35,7 +35,7 @@ class DjangoPostRepository(PostRepositoryInterface):
                     'content': post.content,
                     'created_at': post.created_at,
                     'rating_count': post.rate_count,
-                    'average_rating': average_rating,
+                    'average_rating': round(average_rating, 1),
                     'user_score': user_score,
                 })
 

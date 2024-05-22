@@ -108,3 +108,7 @@ REST_FRAMEWORK = {
         'user': '1000/day',
     },
 }
+
+MIGRATION_MODULES = {
+    'posts': 'posts.storage.migrations',
+}
