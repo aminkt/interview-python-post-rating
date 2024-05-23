@@ -5,7 +5,6 @@
 - [Design and Architecture](#design-and-architecture)
 - [Quick Setup](#quick-setup)
 - [Run Tests](#run-tests)
-- [Considerations](#considerations)
 
 ## Introduction
 This Django application is designed and implemented using Django Rest Framework (DRF) to allow users to view a list of posts and rate them. Each post consists of a title and content.
