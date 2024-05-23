@@ -37,14 +37,17 @@ class DjangoRatingRepository(RatingRepositoryInterface):
 
         for post_id in post_rate_changes:
             item = post_rate_changes[post_id]
-            PostModel.objects.filter(id=post_id).update(rate_count=F('rate_count') + item['rate_count'], score_sum=F('score_sum') + item['score_sum'])
+            PostModel.objects.filter(id=post_id).update(
+                rate_count=F('rate_count') + item['rate_count'],
+                score_sum=F('score_sum') + item['score_sum']
+            )
 
-        RatingModel.objects.filter(post_id__in=applied_ids).update(is_applied=True)
+        RatingModel.objects.filter(id__in=applied_ids).update(is_applied=True)
 
     def get_queued_rate_ids(self, page: int) -> List[int]:
         try:
             date_time = datetime.datetime.now() - datetime.timedelta(hours=6)
-            query = RatingModel.objects.filter(created_at__gte=date_time, is_applied=False).values_list('id', flat=True)
+            query = RatingModel.objects.filter(created_at__lte=date_time, is_applied=False).values_list('id', flat=True)
             paginator = Paginator(query, 500)
             return paginator.page(page)
         except EmptyPage:
@@ -56,7 +59,7 @@ class DjangoRatingRepository(RatingRepositoryInterface):
                 rating = self.get_user_rating_for_post(post_id=post_id, user_id=user_id)
                 # In cases user want to change his rate, but it is not effected yet and old score is settled,
                 # we don't need to change old_score.
-                if rating.is_applied or rating.old_score is None:
+                if rating.is_applied:
                     rating.old_score = rating.score
                 rating.score = score
                 rating.is_applied = False
@@ -71,19 +74,30 @@ class DjangoRatingRepository(RatingRepositoryInterface):
         with transaction.atomic():
             try:
                 rating = self.get_user_rating_for_post(post_id=post_id, user_id=user_id)
-                # no need to save old time. update effected em
-                rating.old_score = rating.score
+                if rating.is_applied:
+                    rating.old_score = rating.score
                 rating.score = score
                 rating.is_applied = True
                 rating.save()
-                PostModel.objects.filter(id=post_id).update(
-                    score_sum=F('score_sum') + (rating.score - rating.old_score))
+
+                if not rating.old_score:
+                    # If old score has not valued, change effect post rate count too.
+                    PostModel.objects.filter(id=post_id).update(
+                        rate_count=F('rate_count') + 1,
+                        score_sum=F('score_sum') + rating.score
+                    )
+                else:
+                    # else difference of old value and new value will affect on post rate score sum.
+                    PostModel.objects.filter(id=post_id).update(score_sum=F('score_sum') + (rating.score - rating.old_score))
             except RatingModel.DoesNotExist:
+                # And if not rated before, both score and count in the post will change.
                 post = PostModel.objects.get(id=post_id)
                 user = User.objects.get(id=user_id)
                 rating = RatingModel(post=post, user=user, score=score, is_applied=True)
-                PostModel.objects.filter(id=post_id).update(rate_count=F('rate_count') + 1,
-                                                            score_sum=F('score_sum') + rating.score)
+                PostModel.objects.filter(id=post_id).update(
+                    rate_count=F('rate_count') + 1,
+                    score_sum=F('score_sum') + rating.score
+                )
                 rating.save()
 
     def get_user_rating_for_post(self, post_id: int, user_id: int) -> RatingModel:

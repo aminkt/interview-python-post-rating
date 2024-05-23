@@ -1,11 +1,11 @@
-<mxfile host="app.diagrams.net" modified="2024-05-22T12:48:27.101Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="p27Ou1EOcjrZHNpjs_ZN" version="24.4.6" type="device">
+<mxfile host="app.diagrams.net" modified="2024-05-23T17:41:44.501Z" agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36" etag="NS7MKqqpirGe-HGuVpu1" version="24.4.6" type="device">
   <diagram name="Page-1" id="A13zV0KK_G3ZBwLwW0nN">
-    <mxGraphModel dx="868" dy="1056" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+    <mxGraphModel dx="920" dy="1172" grid="0" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
       <root>
         <mxCell id="0" />
         <mxCell id="1" parent="0" />
-        <mxCell id="g95xKWHiburPXzUNhOFQ-1" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;Routes&lt;/h1&gt;&lt;p&gt;Get /posts&lt;/p&gt;&lt;p&gt;Post /posts/&amp;lt;postId&amp;gt;/rates&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="-32" y="-122" width="180" height="120" as="geometry" />
+        <mxCell id="g95xKWHiburPXzUNhOFQ-1" value="&lt;h2 style=&quot;margin-top: 0px;&quot;&gt;Routes&lt;/h2&gt;&lt;p&gt;Get /posts&lt;br&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;Post /posts/&amp;lt;postId&amp;gt;/rates&lt;/span&gt;&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
+          <mxGeometry x="477" y="-117" width="180" height="120" as="geometry" />
         </mxCell>
         <mxCell id="g95xKWHiburPXzUNhOFQ-8" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=0.5;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" parent="1" source="g95xKWHiburPXzUNhOFQ-3" target="g95xKWHiburPXzUNhOFQ-6" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -18,9 +18,6 @@
         </mxCell>
         <mxCell id="g95xKWHiburPXzUNhOFQ-4" value="Client" style="sketch=0;outlineConnect=0;fontColor=#232F3E;gradientColor=none;strokeColor=#232F3E;fillColor=#ffffff;dashed=0;verticalLabelPosition=bottom;verticalAlign=top;align=center;html=1;fontSize=12;fontStyle=0;aspect=fixed;shape=mxgraph.aws4.resourceIcon;resIcon=mxgraph.aws4.client;" parent="1" vertex="1">
           <mxGeometry x="20" y="196" width="60" height="60" as="geometry" />
-        </mxCell>
-        <mxCell id="g95xKWHiburPXzUNhOFQ-5" value="&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;System Consideration&lt;/h1&gt;&lt;p&gt;* Lot&#39;s of write for each post rate&lt;/p&gt;&lt;p&gt;* Read performance for post rates&lt;/p&gt;&lt;p&gt;* Anti fraud system for rating actions.&lt;br&gt;&lt;/p&gt;&lt;p&gt;* System should be AP (From CAP theory) to handle load, be scalable and also be available to show post data. Eventual consistency is ok for this system.&lt;/p&gt;&lt;p&gt;&lt;br&gt;&lt;/p&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" parent="1" vertex="1">
-          <mxGeometry x="229" y="-122" width="302" height="178" as="geometry" />
         </mxCell>
         <mxCell id="g95xKWHiburPXzUNhOFQ-15" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0;entryY=1;entryDx=0;entryDy=0;fontSize=12;startSize=8;endSize=8;" parent="1" source="g95xKWHiburPXzUNhOFQ-6" target="g95xKWHiburPXzUNhOFQ-9" edge="1">
           <mxGeometry relative="1" as="geometry" />
@@ -56,34 +53,37 @@
           <mxGeometry relative="1" as="geometry" />
         </mxCell>
         <mxCell id="g95xKWHiburPXzUNhOFQ-24" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;&lt;b&gt;posts_rates&lt;br&gt;(shard by postId)&lt;/b&gt;&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;&gt;&lt;div style=&quot;height:2px;&quot;&gt;+ id: bigint (8B)&lt;br&gt;+ post_id: int (4B)&lt;br&gt;+ user_id: int(4B)&lt;br&gt;+ score: smallint (2B)&lt;br&gt;+ old_score: smallint (2B)&lt;br&gt;+ is_applied: boolean(1B)&lt;br&gt;&lt;div style=&quot;height: 2px;&quot;&gt;+ created_at: datetime (8B)&lt;br&gt;&lt;/div&gt;&lt;div&gt;&lt;br&gt;&lt;/div&gt;&lt;/div&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;" parent="1" vertex="1">
-          <mxGeometry x="266" y="351" width="194" height="153" as="geometry" />
+          <mxGeometry x="266" y="340" width="194" height="153" as="geometry" />
         </mxCell>
         <mxCell id="g95xKWHiburPXzUNhOFQ-27" value="7GB for 100 thousand posts" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;" parent="1" vertex="1">
           <mxGeometry x="-11" y="306" width="217" height="31" as="geometry" />
         </mxCell>
         <mxCell id="g95xKWHiburPXzUNhOFQ-29" value="Each post, 5 million rate:&lt;div&gt;&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;" parent="1" vertex="1">
-          <mxGeometry x="267" y="301" width="193" height="50" as="geometry" />
+          <mxGeometry x="267" y="290" width="193" height="50" as="geometry" />
         </mxCell>
         <mxCell id="g95xKWHiburPXzUNhOFQ-30" value="&lt;div&gt;&lt;font style=&quot;font-size: 12px;&quot;&gt;15TB for 100,000 post * 5 million rate&lt;/font&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;" parent="1" vertex="1">
-          <mxGeometry x="253" y="325" width="216" height="31" as="geometry" />
+          <mxGeometry x="253" y="314" width="216" height="31" as="geometry" />
         </mxCell>
-        <mxCell id="g95xKWHiburPXzUNhOFQ-31" value="&lt;div style=&quot;text-align: left; font-size: 12px;&quot;&gt;&lt;span style=&quot;background-color: initial;&quot;&gt;This table is log of each rate which be used&lt;br&gt;when you want update your rate.&lt;br&gt;&lt;/span&gt;You can shard it by post id to keep database functional&lt;br&gt;if record increase.&lt;br&gt;&lt;/div&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;" parent="1" vertex="1">
-          <mxGeometry x="256" y="510" width="308" height="70" as="geometry" />
+        <mxCell id="g95xKWHiburPXzUNhOFQ-31" value="&lt;div style=&quot;&quot;&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;This table logs each rate used for updating your rate.&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;You can shard it by post ID to keep the database &lt;br&gt;functional as the records increase.&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;&lt;br&gt;&lt;/span&gt;&lt;/div&gt;&lt;div style=&quot;&quot;&gt;&lt;span style=&quot;font-size: 12px;&quot;&gt;There are enough reasons to use a NoSQL database,&lt;br&gt;&amp;nbsp;but let&#39;s keep it simple. PostgreSQL is fine too and&lt;br&gt;&amp;nbsp;has good features for concurrency control and scaling.&lt;/span&gt;&lt;/div&gt;&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=16;" parent="1" vertex="1">
+          <mxGeometry x="472" y="345" width="310" height="146" as="geometry" />
         </mxCell>
-        <mxCell id="OkIYj3103qbB7PWcmSPV-1" value="" style="group" vertex="1" connectable="0" parent="1">
-          <mxGeometry x="561" y="-9" width="142" height="118" as="geometry" />
+        <mxCell id="OkIYj3103qbB7PWcmSPV-1" value="" style="group" parent="1" vertex="1" connectable="0">
+          <mxGeometry x="536" y="33" width="142" height="118" as="geometry" />
         </mxCell>
-        <mxCell id="OkIYj3103qbB7PWcmSPV-2" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="OkIYj3103qbB7PWcmSPV-1">
+        <mxCell id="OkIYj3103qbB7PWcmSPV-2" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="OkIYj3103qbB7PWcmSPV-1" vertex="1">
           <mxGeometry x="3" width="106" height="47" as="geometry" />
         </mxCell>
-        <mxCell id="OkIYj3103qbB7PWcmSPV-3" value="" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="OkIYj3103qbB7PWcmSPV-1">
+        <mxCell id="OkIYj3103qbB7PWcmSPV-3" value="" style="rounded=0;whiteSpace=wrap;html=1;" parent="OkIYj3103qbB7PWcmSPV-1" vertex="1">
           <mxGeometry x="13" y="10" width="106" height="47" as="geometry" />
         </mxCell>
-        <mxCell id="OkIYj3103qbB7PWcmSPV-4" value="FraudWorkers" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="OkIYj3103qbB7PWcmSPV-1">
+        <mxCell id="OkIYj3103qbB7PWcmSPV-4" value="FraudWorkers" style="rounded=0;whiteSpace=wrap;html=1;" parent="OkIYj3103qbB7PWcmSPV-1" vertex="1">
           <mxGeometry x="23" y="20" width="106" height="47" as="geometry" />
         </mxCell>
-        <mxCell id="OkIYj3103qbB7PWcmSPV-5" value="These workers load&amp;nbsp;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;" vertex="1" parent="OkIYj3103qbB7PWcmSPV-1">
-          <mxGeometry x="13" y="87" width="117" height="25" as="geometry" />
+        <mxCell id="4o4NbnxVGa7DIjqOIOSn-1" style="edgeStyle=none;curved=1;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;fontSize=12;startSize=8;endSize=8;" parent="1" source="OkIYj3103qbB7PWcmSPV-4" target="g95xKWHiburPXzUNhOFQ-16" edge="1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="ukEkeMWxO7Vua0eZMhOf-2" value="&lt;h1&gt;System Consideration&lt;/h1&gt;&lt;h1 style=&quot;margin-top: 0px;&quot;&gt;&lt;ul style=&quot;font-size: 12px;&quot;&gt;&lt;li style=&quot;&quot;&gt;Real-World Conditions:&lt;span style=&quot;font-weight: 400;&quot;&gt; The design and implementation consider real-world production conditions to ensure scalability, reliability, and performance.&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;&quot;&gt;Simplicity: &lt;span style=&quot;font-weight: 400;&quot;&gt;The solution focuses on simplicity while addressing the core requirements. Additional features like user profiles are omitted for simplicity.&lt;/span&gt;&lt;/li&gt;&lt;li style=&quot;&quot;&gt;Anti-Fraud Mechanism:&lt;span style=&quot;font-weight: 400;&quot;&gt; The application implements a mechanism to prevent short-term events from significantly impacting post ratings. While the exact strategy may vary, the goal is to stabilize ratings over time and mitigate the influence of short-term fluctuations.&lt;/span&gt;&lt;/li&gt;&lt;/ul&gt;&lt;/h1&gt;" style="text;html=1;whiteSpace=wrap;overflow=hidden;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="2" y="-140" width="440" height="222" as="geometry" />
         </mxCell>
       </root>
     </mxGraphModel>
